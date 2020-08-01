@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://notification.soap.spqr.talos.btireland.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="NOTIFICATION" >
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="HEADER">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="DATA_CONTRACT_NAME" type="xs:string"/>
+                            <xs:element name="ORIGINATOR_CODE" type="xs:string" />
+                            <xs:element name="TRANSACTION_ID" type="xs:unsignedShort" />
+                            <xs:element name="DATE_TIME_STAMP" type="xs:string" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="NOTIFICATION_DATA">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="NAME" type="xs:string" />
+                            <xs:element name="CODE" type="xs:string" />
+                            <xs:element name="ORDER_NUMBER" type="xs:unsignedByte" />
+                            <xs:element name="APPLICATION_DATE" type="xs:string" />
+                            <xs:element name="RECEIVED_DATE" type="xs:string" />
+                            <xs:element name="MESSAGE_TYPE" type="xs:string" />
+                            <xs:element name="MESSAGE_DATE" type="xs:string" />
+                            <xs:element name="OVERALL_RESPONSE" type="xs:string" />
+                            <xs:element name="AVAILABILITY">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="SERVICE_IDENTIFIER">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="EIRCODE" type="xs:string" />
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="AVAILABILITY_RESULT" type="xs:string" />
+                                        <xs:element name="AVAIL_SERVICES">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="AVAIL_SERVICE">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="SERVICE_CLASS" type="xs:string" />
+                                                                <xs:element name="SERVICE_RESULT" type="xs:string" />
+                                                                <xs:element name="SERVICE_DATE" type="xs:string" />
+                                                                <xs:element name="SERVICE_STATUS" type="xs:string" />
+                                                                <xs:element name="LINE_ID" type="xs:unsignedInt" />
+                                                                <xs:element maxOccurs="unbounded" name="QUALIFIED_SERVICE">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element name="SERVICE_CODE" type="xs:string" />
+                                                                            <xs:element name="RECOMMENDED" type="xs:string" />
+                                                                        </xs:sequence>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                                <xs:element name="SURVEY_DETAILS">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element name="SURVEY_REQUIRED" type="xs:string" />
+                                                                        </xs:sequence>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                                <xs:element name="SERVICE_ATTRIBUTES">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element maxOccurs="unbounded" name="ATTRIBUTE">
+                                                                                <xs:complexType>
+                                                                                    <xs:sequence>
+                                                                                        <xs:element name="NAME" type="xs:string" />
+                                                                                        <xs:element name="VALUE" type="xs:string" />
+                                                                                    </xs:sequence>
+                                                                                </xs:complexType>
+                                                                            </xs:element>
+                                                                        </xs:sequence>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

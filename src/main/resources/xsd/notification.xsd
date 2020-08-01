@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://notification.soap.spqr.talos.btireland.com" targetNamespace="http://notification.soap.spqr.talos.btireland.com" attributeFormDefault="unqualified" elementFormDefault="qualified">
+   <xs:element name="SPQRRequest" type="tns:SPQRRequest"/>
+   <xs:element name="SPQRResponse" type="tns:SPQRRESPONSE"/>
+   <xs:complexType name="SPQRRequest">
+      <xs:sequence>
+         <xs:element type="xs:double" name="VERSION" minOccurs="1" maxOccurs="1" />
+         <xs:element name="ORDER" minOccurs="1" maxOccurs="1">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element name="HEADER" minOccurs="1" maxOccurs="1">
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="DATA_CONTRACT_NAME" minOccurs="1" maxOccurs="1">
+                              <xs:simpleType>
+                                 <xs:restriction base="xs:string">
+                                    <xs:maxLength value="30" />
+                                    <xs:enumeration value="WAG">
+                                       <xs:annotation>
+                                          <xs:documentation>Wholesale_Access_Gateway</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:enumeration>
+                                 </xs:restriction>
+                              </xs:simpleType>
+                           </xs:element>
+                           <xs:element name="ORIGINATOR_CODE" minOccurs="1" maxOccurs="1">
+                              <xs:simpleType>
+                                 <xs:restriction base="xs:string">
+                                    <xs:maxLength value="5" />
+                                    <xs:enumeration value="EXT" />
+                                 </xs:restriction>
+                              </xs:simpleType>
+                           </xs:element>
+                           <xs:element name="TRANSACTION_ID" minOccurs="1" maxOccurs="1" type="tns:numbermax20" />
+                           <xs:element name="DATE_TIME_STAMP" minOccurs="1" maxOccurs="1" type="tns:charmax19" />
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="ORDER_DATA" minOccurs="1" maxOccurs="1">
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="OPERATOR_DETAILS" minOccurs="1" maxOccurs="1">
+                              <xs:complexType>
+                                 <xs:sequence>
+                                    <xs:element name="NAME" minOccurs="1" maxOccurs="1" type="tns:charmax30" />
+                                    <xs:element name="CODE" minOccurs="1" maxOccurs="1" type="tns:charmax5" />
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                           <xs:element name="ORDER_DETAILS" minOccurs="1" maxOccurs="1">
+                              <xs:complexType>
+                                 <xs:sequence>
+                                    <xs:element name="ORDER_NUMBER" minOccurs="1" maxOccurs="1" type="tns:charmax32" />
+                                    <xs:element name="TYPE" minOccurs="1" maxOccurs="1">
+                                       <xs:simpleType>
+                                          <xs:restriction base="xs:string">
+                                             <xs:maxLength value="5" />
+                                             <xs:enumeration value="SPQR">
+                                                <xs:annotation>
+                                                   <xs:documentation>Super Prequalifier Query</xs:documentation>
+                                                </xs:annotation>
+                                             </xs:enumeration>
+                                             <xs:enumeration value="SPQRB">
+                                                <xs:annotation>
+                                                   <xs:documentation>Super Prequalifier Query</xs:documentation>
+                                                </xs:annotation>
+                                             </xs:enumeration>
+                                          </xs:restriction>
+                                       </xs:simpleType>
+                                    </xs:element>
+                                    <xs:element name="APPLICATION_DATE" minOccurs="1" maxOccurs="1" type="tns:charmax10" />
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                           <xs:element name="TARGET_DETAILS" minOccurs="1" maxOccurs="1">
+                              <xs:complexType>
+                                 <xs:sequence>
+                                    <xs:element name="TARGET_IDENTIFIER" minOccurs="1" maxOccurs="1">
+                                       <xs:complexType>
+                                          <xs:sequence>
+                                             <xs:element name="ACCOUNT_NUMBER" minOccurs="0" maxOccurs="1">
+                                                <xs:simpleType>
+                                                   <xs:restriction base="xs:string">
+                                                      <xs:minLength value="8" />
+                                                      <xs:maxLength value="12" />
+                                                   </xs:restriction>
+                                                </xs:simpleType>
+                                             </xs:element>
+                                             <xs:element name="TELE_NO" minOccurs="0" maxOccurs="1" type="tns:charmax20" />
+                                             <xs:element name="EIRCODE" minOccurs="0" maxOccurs="1">
+                                                <xs:simpleType>
+                                                   <xs:restriction base="xs:string">
+                                                      <xs:minLength value="7" />
+                                                      <xs:maxLength value="8" />
+                                                   </xs:restriction>
+                                                </xs:simpleType>
+                                             </xs:element>
+                                          </xs:sequence>
+                                       </xs:complexType>
+                                    </xs:element>
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="SPQRRESPONSE">
+      <xs:sequence>
+         <xs:element type="xs:double" name="VERSION" minOccurs="0" maxOccurs="1" />
+         <xs:element name="NOTIFICATION">
+            <xs:complexType mixed="true">
+               <xs:sequence>
+                  <xs:element name="HEADER" minOccurs="1" maxOccurs="1">
+                     <xs:complexType mixed="true">
+                        <xs:sequence>
+                           <xs:element name="DATA_CONTRACT_NAME" type="tns:charmax30" minOccurs="1" maxOccurs="1" />
+                           <xs:element name="ORIGINATOR_CODE" type="tns:charmax5" minOccurs="1" maxOccurs="1" />
+                           <xs:element name="TRANSACTION_ID" type="tns:numbermax20" minOccurs="1" maxOccurs="1" />
+                           <xs:element name="DATE_TIME_STAMP" type="tns:charmax19" minOccurs="1" maxOccurs="1" />
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="NOTIFICATION_DATA">
+                     <xs:complexType mixed="true">
+                        <xs:sequence>
+                           <xs:element name="NAME" type="tns:charmax30" minOccurs="1" maxOccurs="1" />
+                           <xs:element name="CODE" type="tns:charmax5" minOccurs="1" maxOccurs="1" />
+                           <xs:element name="ORDER_NUMBER" type="tns:charmax20" minOccurs="1" maxOccurs="1" />
+                           <xs:element name="APPLICATION_DATE" type="tns:charmax10" minOccurs="1" maxOccurs="1" />
+                           <xs:element name="RECEIVED_DATE" type="tns:charmax19" minOccurs="1" maxOccurs="1" />
+                           <xs:element name="MESSAGE_TYPE" type="tns:charmax3" minOccurs="1" maxOccurs="1" />
+                           <xs:element name="MESSAGE_DATE" type="tns:charmax19" minOccurs="1" maxOccurs="1" />
+                           <xs:element name="OVERALL_RESPONSE" type="tns:charmax20" minOccurs="1" maxOccurs="1" />
+                           <xs:element name="INTERNAL_STATUS" type="xs:string" minOccurs="0" maxOccurs="1" />
+                           <xs:element name="ERRORS" minOccurs="0" maxOccurs="1">
+                              <xs:complexType mixed="true">
+                                 <xs:sequence>
+                                    <xs:element name="ERROR_RESPONSE" minOccurs="1" maxOccurs="1">
+                                       <xs:complexType mixed="true">
+                                          <xs:sequence>
+                                             <xs:element name="PROVIDER" minOccurs="1" maxOccurs="1" type="tns:charmax20" />
+                                             <xs:element name="REQUEST" minOccurs="1" maxOccurs="1" type="tns:charmax20" />
+                                             <xs:element name="RESPONSE_CODE" minOccurs="1" maxOccurs="1" type="tns:charmax20" />
+                                          </xs:sequence>
+                                       </xs:complexType>
+                                    </xs:element>
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                           <xs:element name="AVAILABILITY" minOccurs="1" maxOccurs="1">
+                              <xs:complexType mixed="true">
+                                 <xs:sequence>
+                                    <xs:element name="SERVICE_IDENTIFIER" minOccurs="1" maxOccurs="1">
+                                       <xs:complexType mixed="true">
+                                          <xs:sequence>
+                                             <xs:element name="TELE_NO" minOccurs="0" maxOccurs="1" type="tns:charmax20" />
+                                             <xs:element name="EIRCODE" minOccurs="0" maxOccurs="1" type="tns:charmax8" />
+                                          </xs:sequence>
+                                       </xs:complexType>
+                                    </xs:element>
+                                    <xs:element name="AVAILABILITY_RESULT">
+                                       <xs:simpleType>
+                                          <xs:restriction base="tns:charmax60">
+                                             <xs:enumeration value="GREEN" />
+                                             <xs:enumeration value="RED" />
+                                          </xs:restriction>
+                                       </xs:simpleType>
+                                    </xs:element>
+                                    <xs:element name="AVAIL_SERVICES" minOccurs="0" maxOccurs="1">
+                                       <xs:complexType mixed="true">
+                                          <xs:sequence>
+                                             <xs:element maxOccurs="unbounded" name="AVAIL_SERVICE">
+                                                <xs:complexType mixed="true">
+                                                   <xs:sequence>
+                                                      <xs:element name="SERVICE_CLASS" minOccurs="1" maxOccurs="1">
+                                                         <xs:simpleType>
+                                                            <xs:restriction base="tns:charmax8">
+                                                               <xs:enumeration value="SFTH" />
+                                                               <xs:enumeration value="SFIB" />
+                                                               <xs:enumeration value="SFTC" />
+                                                            </xs:restriction>
+                                                         </xs:simpleType>
+                                                      </xs:element>
+                                                      <xs:element name="SERVICE_RESULT" minOccurs="1" maxOccurs="1">
+                                                         <xs:simpleType>
+                                                            <xs:restriction base="tns:charmax60">
+                                                               <xs:enumeration value="GREEN" />
+                                                               <xs:enumeration value="RED" />
+                                                               <xs:enumeration value="LINE_UNKNOWN" />
+                                                            </xs:restriction>
+                                                         </xs:simpleType>
+                                                      </xs:element>
+                                                      <xs:element name="SERVICE_DATE" minOccurs="0" maxOccurs="1" type="tns:charmax10" />
+                                                      <xs:element name="SERVICE_STATUS" minOccurs="0" maxOccurs="1">
+                                                         <xs:simpleType>
+                                                            <xs:restriction base="tns:charmax20">
+                                                               <xs:enumeration value="AVAILABLE" />
+                                                               <xs:enumeration value="ACTIVE" />
+                                                               <xs:enumeration value="INACTIVE" />
+                                                            </xs:restriction>
+                                                         </xs:simpleType>
+                                                      </xs:element>
+                                                      <xs:element name="THIRD_PARTY_CEASE" minOccurs="0" maxOccurs="1" type="tns:charmax3" />
+                                                      <xs:element name="QUALIFIED_SERVICE" minOccurs="1" maxOccurs="unbounded">
+                                                         <xs:complexType mixed="true">
+                                                            <xs:sequence>
+                                                               <xs:element name="SERVICE_CODE" minOccurs="1" maxOccurs="1" type="tns:charmax20" />
+                                                               <xs:element name="PROFILE_CODE" minOccurs="0" maxOccurs="1" type="tns:charmax20" />
+                                                               <xs:element name="RECOMMENDED" minOccurs="0" maxOccurs="1" type="tns:charmax1" />
+                                                               <xs:element name="SERVICE_DATE" minOccurs="0" maxOccurs="1" type="tns:charmax10" />
+                                                            </xs:sequence>
+                                                         </xs:complexType>
+                                                      </xs:element>
+                                                      <xs:element name="SERVICE_ATTRIBUTES" minOccurs="0" maxOccurs="1" type="tns:SERVICE_ATTRIBUTES" />
+                                                      <xs:element name="INTERNAL_AVAIL">
+                                                         <xs:complexType mixed="true">
+                                                            <xs:sequence>
+                                                               <xs:element minOccurs="0" name="SIRO">
+                                                                  <xs:complexType mixed="true">
+                                                                     <xs:sequence>
+                                                                        <xs:element name="PREMISES_ID" type="xs:string" />
+                                                                     </xs:sequence>
+                                                                  </xs:complexType>
+                                                               </xs:element>
+                                                               <xs:element minOccurs="0" name="EIRCOM">
+                                                                  <xs:complexType mixed="true">
+                                                                     <xs:sequence>
+                                                                        <xs:element name="FIBRE">
+                                                                           <xs:complexType mixed="true">
+                                                                              <xs:sequence>
+                                                                                 <xs:element name="HAS_VUA_QS" type="xs:string" />
+                                                                                 <xs:element name="HAS_BSP_QS" type="xs:string" />
+                                                                                 <xs:element name="VUA_DELIVERABLE" type="xs:string" />
+                                                                              </xs:sequence>
+                                                                           </xs:complexType>
+                                                                        </xs:element>
+                                                                     </xs:sequence>
+                                                                  </xs:complexType>
+                                                               </xs:element>
+                                                            </xs:sequence>
+                                                         </xs:complexType>
+                                                      </xs:element>
+                                                   </xs:sequence>
+                                                </xs:complexType>
+                                             </xs:element>
+                                          </xs:sequence>
+                                       </xs:complexType>
+                                    </xs:element>
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="SERVICE_ATTRIBUTES">
+      <xs:sequence>
+         <xs:element minOccurs="1" maxOccurs="unbounded" name="ATTRIBUTE">
+            <xs:complexType mixed="true">
+               <xs:sequence>
+                  <xs:element name="NAME" minOccurs="1" maxOccurs="1" type="tns:charmax50" />
+                  <xs:element name="VALUE" minOccurs="1" maxOccurs="1" type="tns:charmax200" />
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:simpleType name="charmax1">
+      <xs:restriction base="xs:string">
+         <xs:minLength value="1" />
+         <xs:maxLength value="1" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="charmax10">
+      <xs:restriction base="xs:string">
+         <xs:minLength value="1" />
+         <xs:maxLength value="10" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="charmax19">
+      <xs:restriction base="xs:string">
+         <xs:minLength value="1" />
+         <xs:maxLength value="19" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="charmax20">
+      <xs:restriction base="xs:string">
+         <xs:minLength value="1" />
+         <xs:maxLength value="20" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="charmax200">
+      <xs:restriction base="xs:string">
+         <xs:minLength value="1" />
+         <xs:maxLength value="200" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="charmax3">
+      <xs:restriction base="xs:string">
+         <xs:minLength value="1" />
+         <xs:maxLength value="3" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="charmax30">
+      <xs:restriction base="xs:string">
+         <xs:minLength value="1" />
+         <xs:maxLength value="30" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="charmax32">
+      <xs:restriction base="xs:string">
+         <xs:minLength value="1" />
+         <xs:maxLength value="32" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="charmax5">
+      <xs:restriction base="xs:string">
+         <xs:minLength value="1" />
+         <xs:maxLength value="5" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="charmax50">
+      <xs:restriction base="xs:string">
+         <xs:minLength value="1" />
+         <xs:maxLength value="50" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="charmax60">
+      <xs:restriction base="xs:string">
+         <xs:minLength value="1" />
+         <xs:maxLength value="60" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="charmax8">
+      <xs:restriction base="xs:string">
+         <xs:minLength value="1" />
+         <xs:maxLength value="8" />
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="numbermax20">
+      <xs:restriction base="xs:long">
+         <xs:totalDigits value="20" />
+      </xs:restriction>
+   </xs:simpleType>
+</xs:schema>
